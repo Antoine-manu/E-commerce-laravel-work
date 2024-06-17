@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
+    <title>Profil</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -20,7 +20,6 @@
                     <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
                     <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
                     <li><a href="/contact" class="nav-link px-2 link-body-emphasis">Contact</a></li>
-                    <li><a href="/profil" class="nav-link px-2 link-body-emphasis">Profile</a></li>
                 </ul>
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                     <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
@@ -40,5 +39,16 @@
             </div>
         </div>
     </header>
+    <div class="container mt-5">
+        <h1>Profil de l'utilisateur</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ Auth::user()->name }}</h5>
+                <p class="card-text"><strong>Email: </strong>{{ Auth::user()->email }}</p>
+                <p class="card-text"><strong>Date d'inscription: </strong>{{ Auth::user()->created_at->format('d/m/Y') }}</p>
+                <a href="#" class="btn btn-primary">Modifier le profil</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
