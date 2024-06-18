@@ -68,6 +68,9 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="row mb-0 mt-3">
+                            <SPAN class="text-center">Déja inscrit ? <a href="/login" class="text-primary">Connectez vous</a></SPAN>
+                        </div>
                     </form>
                 </div>
             </div>
