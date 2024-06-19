@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth; // Add this line
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
@@ -25,6 +26,11 @@ Route::get('/contact', function () {
 });
 
 
+
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 Auth::routes();
 
