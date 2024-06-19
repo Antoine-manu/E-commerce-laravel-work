@@ -13,17 +13,16 @@
         </div>
         <div class="form-group mb-2 mb20">
             <label for="price" class="form-label">{{ __('Price') }}</label>
-            <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $product?->price) }}" id="price" placeholder="Price">
+            <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $product?->price) }}" id="price" placeholder="Price">
             {!! $errors->first('price', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
             <label for="image" class="form-label">{{ __('Image') }}</label>
-            <input type="text" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image', $product?->image) }}" id="image" placeholder="Image">
-            {!! $errors->first('image', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+            <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image', $product?->image) }}" id="image" placeholder="Image">
         </div>
 
     </div>
     <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" class="btn btn-primary">Créer</button>
     </div>
 </div>

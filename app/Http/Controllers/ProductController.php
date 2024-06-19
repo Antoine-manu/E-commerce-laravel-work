@@ -37,7 +37,20 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request): RedirectResponse
     {
-        Product::create($request->validated());
+        // Récupérer l'image du formulaire
+        $image = $request->file('image');
+
+        // Génération d'un nom de fichier unique
+        $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+
+        // Enregistrer l'image dans le système de fichiers
+        $image->storeAs('public/images', $fileName); 
+        $product = new Product;
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->image = $fileName;
+        $product->save();
 
         return Redirect::route('products.index')
             ->with('success', 'Product created successfully.');
@@ -89,7 +102,7 @@ class ProductController extends Controller
     }
     public function showAll()
     {
-        $product = Product::find();
+        $product = Product::all();
         return view('products/products', compact('product'));
     }
 

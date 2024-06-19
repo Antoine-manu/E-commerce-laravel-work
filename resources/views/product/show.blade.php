@@ -21,20 +21,21 @@
                     <div class="card-body bg-white">
                         
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Name:</strong>
+                                    <strong>Nom :</strong>
                                     {{ $product->name }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Description:</strong>
+                                    <strong>Description :</strong>
                                     {{ $product->description }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Price:</strong>
+                                    <strong>Prix :</strong>
                                     {{ $product->price }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Image:</strong>
-                                    {{ $product->image }}
+                                    <strong>Image :</strong>
+                                    {{$product->image }}
+                                    <img src={{ asset('storage/images/' . $product->image ) }} alt="">
                                 </div>
 
                     </div>
