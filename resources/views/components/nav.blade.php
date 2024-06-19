@@ -6,6 +6,7 @@
         </a>
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/" class="nav-link px-2 link-secondary">Produits</a></li>
+            <li><a href="/cart" class="nav-link px-2 link-body-emphasis">Mon panier</a></li>
             <li><a href="/contact" class="nav-link px-2 link-body-emphasis">Contactez nous !</a></li>
             <li><a href="/products" class="nav-link px-2 link-body-emphasis">Admin</a></li>
         </ul>
@@ -15,9 +16,9 @@
                 <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small">
-                <li><a class="dropdown-item" href="/profil">Mon profile</a></li>
+                <li><a class="dropdown-item" href="/profil">Mon profil</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item text-danger" href="/login">Deconnexion</a></li>
+                <li><a class="dropdown-item text-danger" href="/login">Déconnexion</a></li>
             </ul>
         </div>
         @else

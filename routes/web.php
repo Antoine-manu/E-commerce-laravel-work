@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth; // Add this line
 
 use App\Http\Controllers\ProductController;
+use \App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     $user = auth()->user();
@@ -14,6 +15,7 @@ Route::get('/', function () {
 
 Route::get('/product/{id}', [ProductController::class, 'showPublic'])->name('product.show');
 Route::resource('products', ProductController::class);
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [ProductController::class, 'addToCart'])->name('cart.add');
 Route::get('/profil', function () {
     return view('profil');
