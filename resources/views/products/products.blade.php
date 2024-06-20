@@ -1,77 +1,27 @@
 @include('components.header')
 <div class="d-flex flex-column container w-100">
-    <span class="fw-medium mt-2 mb-4">Produits :</span>
-    <div class="d-flex flex-row flex-wrap w-100">
+    <div class="d-flex flex-row flex-wrap w-100 mt-4">
+        @foreach ($product as $produit)
         <div class="cardItem">
-            <img src="{{asset('chaise.webp')}}" class="cardItem-img" alt="">
+            <img src="{{ asset('storage/images/' . $produit->image ) }}" class="cardItem-img" alt="">
             <div class="d-flex flex-row align-items-center justify-content-between w-100 mt-4">
                 <div class="d-flex flex-column">
-                    <span class="cardItem-title">Titre</span>
-                    <span class="cardItem-subtitle">45.34</span>
+                    <a class="cardItem-title text-primary" href="{{route('product.showPublic', $produit->id)}}">{{$produit->name}}</a>
+                    <span class="cardItem-subtitle">{{$produit->price}} euros</span>
                 </div>
-                <button class="btn btn-primary">
-                    +
-                    <i class="fa-solid fa-cart-shopping ms-2"></i>
-                </button>
+                @auth
+                    <form action="{{ route('cart.add') }}" method="POST">
+                        @csrf
+                        <input name="product_id" type="hidden" value="{{$produit->id}}">
+                        <button type="submit" class="btn btn-primary circle panier">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </form>
+                @endauth
             </div>
-            <span class="cardItem-subtitle mt-3 text-secondary">sous titre test kela e ekf ekf eofo efke okfoek foe</span>
+            <span class="cardItem-subtitle mt-3 text-secondary">{{$produit->description}}</span>
         </div>
-        <div class="cardItem">
-            <img src="{{asset('chaise.webp')}}" class="cardItem-img" alt="">
-            <div class="d-flex flex-row align-items-center justify-content-between w-100 mt-4">
-                <div class="d-flex flex-column">
-                    <span class="cardItem-title">Titre</span>
-                    <span class="cardItem-subtitle">45.34</span>
-                </div>
-                <button class="btn btn-primary">
-                    +
-                    <i class="fa-solid fa-cart-shopping ms-2"></i>
-                </button>
-            </div>
-            <span class="cardItem-subtitle mt-3 text-secondary">sous titre test kela e ekf ekf eofo efke okfoek foe</span>
-        </div>
-        <div class="cardItem">
-            <img src="{{asset('chaise.webp')}}" class="cardItem-img" alt="">
-            <div class="d-flex flex-row align-items-center justify-content-between w-100 mt-4">
-                <div class="d-flex flex-column">
-                    <span class="cardItem-title">Titre</span>
-                    <span class="cardItem-subtitle">45.34</span>
-                </div>
-                <button class="btn btn-primary">
-                    +
-                    <i class="fa-solid fa-cart-shopping ms-2"></i>
-                </button>
-            </div>
-            <span class="cardItem-subtitle mt-3 text-secondary">sous titre test kela e ekf ekf eofo efke okfoek foe</span>
-        </div>
-        <div class="cardItem">
-            <img src="{{asset('chaise.webp')}}" class="cardItem-img" alt="">
-            <div class="d-flex flex-row align-items-center justify-content-between w-100 mt-4">
-                <div class="d-flex flex-column">
-                    <span class="cardItem-title">Titre</span>
-                    <span class="cardItem-subtitle">45.34</span>
-                </div>
-                <button class="btn btn-primary">
-                    +
-                    <i class="fa-solid fa-cart-shopping ms-2"></i>
-                </button>
-            </div>
-            <span class="cardItem-subtitle mt-3 text-secondary">sous titre test kela e ekf ekf eofo efke okfoek foe</span>
-        </div>
-        <div class="cardItem">
-            <img src="{{asset('chaise.webp')}}" class="cardItem-img" alt="">
-            <div class="d-flex flex-row align-items-center justify-content-between w-100 mt-4">
-                <div class="d-flex flex-column">
-                    <span class="cardItem-title">Titre</span>
-                    <span class="cardItem-subtitle">45.34</span>
-                </div>
-                <button class="btn btn-primary">
-                    +
-                    <i class="fa-solid fa-cart-shopping ms-2"></i>
-                </button>
-            </div>
-            <span class="cardItem-subtitle mt-3 text-secondary">sous titre test kela e ekf ekf eofo efke okfoek foe</span>
-        </div>
+        @endforeach
     </div>
 </div>
 @include('components.footer')
