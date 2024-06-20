@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
-    
     protected $perPage = 20;
 
     /**

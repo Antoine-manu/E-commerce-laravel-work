@@ -18,7 +18,15 @@
                         </button>
                     </form>
                 </div>
-                <span class="cardItem-subtitle mt-3 text-secondary">{{$produit->description}}</span>
+                @auth
+                    <form action="{{ route('cart.add') }}" method="POST">
+                        @csrf
+                        <input name="product_id" type="hidden" value="{{$produit->id}}">
+                        <button type="submit" class="btn btn-primary circle panier">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </form>
+                @endauth
             </div>
         @endforeach
     </div>

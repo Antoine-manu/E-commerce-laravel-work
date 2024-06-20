@@ -23,6 +23,4 @@
             <img src="{{asset('contact.svg')}}" class="w-75" alt="">
         </div>
     </div>
-</body>
-</html>
 @include('components.footer')

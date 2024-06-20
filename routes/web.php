@@ -4,6 +4,11 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
+
+Route::get('/orders', [OrderController::class, 'index'])->name('orders')->middleware('auth');
 
 Route::get('/', [ProductController::class, 'showAll'])->name('home');
 
@@ -32,4 +37,4 @@ Route::get('/contact', function () {
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
