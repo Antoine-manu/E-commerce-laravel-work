@@ -1,7 +1,9 @@
 <header class="p-3 mb-3 border-bottom">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start me-4">
-        <img src="{{asset('magento-logo.jpg')}}" style="width: 120px" alt="">
+          <a href="/homepage">
+              <img src="{{asset('magento-logo.jpg')}}" style="width: 120px" alt="">
+            </a>
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/" class="nav-link px-2 link-secondary">Produits</a></li>
             <li><a href="/contact" class="nav-link px-2 link-body-emphasis">Contactez nous !</a></li>

@@ -55,9 +55,9 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::where('user_id', auth()->id())->with('items.product')->get();
+        $orders = Order::all();
 
-        return view('orders.index', compact('orders'));
+        return view('orders.index', ["orders" => $orders]);
     }
     
 }

@@ -32,18 +32,10 @@
             <div class="card p-4">
                 <h3 class="mt-3">Total du panier : {{$total}} €</h3>
                 <hr>
-                <form action="" method="POST">
+                <form action="{{ route('order.create') }}" method="POST">
                     @csrf
-                    <button class="btn btn-primary mt-3">Commander</button>
+                    <button type="submit" class="btn btn-primary">Passer la commande</button>
                 </form>
             </div>
-        @endforeach
-        <form action="{{ route('order.create') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-primary">Passer la commande</button>
-        </form>
-    @else
-        <p>Votre panier est vide.</p>
-    @endif
 </div>
 @include('components.footer')

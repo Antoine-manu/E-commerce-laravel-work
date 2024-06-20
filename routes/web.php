@@ -3,6 +3,7 @@
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,7 @@ use App\Http\Controllers\ContactController;
 Route::get('/orders', [OrderController::class, 'index'])->name('orders')->middleware('auth');
 
 Route::get('/', [ProductController::class, 'showAll'])->name('home');
+Route::get('/homepage', [HomeController::class, 'index'])->name('homepage');
 
 Route::get('/product/{id}', [ProductController::class, 'showPublic'])->name('product.showPublic');
 Route::resource('products', ProductController::class);

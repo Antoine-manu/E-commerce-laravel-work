@@ -5,9 +5,9 @@
         @foreach ($orders as $order)
             <div class="card mb-3">
                 <div class="card-header">
-                    <h2 class="h5">Order #{{ $order->id }} - {{ $order->created_at }}</h2>
+                    <h2 class="h5">Commande #{{ $order->id }} - {{ $order->created_at }}</h2>
                 </div>
-                <div class="card-body">
+                {{-- <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
@@ -26,7 +26,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                </div> --}}
             </div>
         @endforeach
     </div>
