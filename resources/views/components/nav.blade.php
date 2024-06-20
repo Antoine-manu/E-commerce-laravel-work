@@ -16,6 +16,7 @@
             </a>
             <ul class="dropdown-menu text-small">
                 <li><a class="dropdown-item" href="/profil">Mon profil</a></li>
+                <li><a class="dropdown-item" href="/orders">Vos commandes</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item text-danger" href="/login">Déconnexion</a></li>
             </ul>

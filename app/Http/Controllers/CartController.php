@@ -22,7 +22,7 @@ class CartController extends Controller
                 "image" => $p["image"]
             ];
             $items[$index] = $return;
-            $total += $return["price"];
+            $total += $return["total"];
         }
         return view('cart.index', ["products" => $items, "total" => $total]);
     }

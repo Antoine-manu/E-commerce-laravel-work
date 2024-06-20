@@ -112,9 +112,8 @@ class ProductController extends Controller
         $product = Product::findOrFail($request->product_id);
         
         $cart = session()->get('cart', []);
-
-        if($cart["products"]){
-            if($cart[$product->id]){
+        if(count($cart) !== 0){
+            if(array_key_exists($product->id, $cart)){
                 $cart[$product->id] = [
                     "name" => $product->name,
                     "quantity" => intval($cart[$product->id]["quantity"]) + 1,
