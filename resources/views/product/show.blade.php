@@ -35,7 +35,7 @@
                                 <div class="form-group mb-2 mb20">
                                     <strong>Image :</strong>
                                     {{$product->image }}
-                                    <img src={{ asset('storage/images/' . $product->image ) }} alt="">
+                                    <img src={{ asset('storage/images/' . $product->image) }} alt="">
                                 </div>
 
                     </div>

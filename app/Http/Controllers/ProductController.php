@@ -11,9 +11,6 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request): View
     {
         $products = Product::paginate();
@@ -22,29 +19,18 @@ class ProductController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * $products->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(): View
     {
         $product = new Product();
-
         return view('product.create', compact('product'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ProductRequest $request): RedirectResponse
     {
-        // Récupérer l'image du formulaire
         $image = $request->file('image');
-
-        // Génération d'un nom de fichier unique
         $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('public/images', $fileName);
 
-        // Enregistrer l'image dans le système de fichiers
-        $image->storeAs('public/images', $fileName); 
         $product = new Product;
         $product->name = $request->input('name');
         $product->description = $request->input('description');
@@ -52,61 +38,47 @@ class ProductController extends Controller
         $product->image = $fileName;
         $product->save();
 
-        return Redirect::route('products.index')
-            ->with('success', 'Product created successfully.');
+        return Redirect::route('products.index')->with('success', 'Product created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id): View
     {
         $product = Product::find($id);
-
         return view('product.show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id): View
     {
         $product = Product::find($id);
-
         return view('product.edit', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(ProductRequest $request, Product $product): RedirectResponse
     {
         $product->update($request->validated());
-
-        return Redirect::route('products.index')
-            ->with('success', 'Product updated successfully');
+        return Redirect::route('products.index')->with('success', 'Product updated successfully');
     }
 
     public function destroy($id): RedirectResponse
     {
         Product::find($id)->delete();
-
-        return Redirect::route('products.index')
-            ->with('success', 'Product deleted successfully');
+        return Redirect::route('products.index')->with('success', 'Product deleted successfully');
     }
 
-    public function showPublic($id)
+    public function showPublic($id): View
     {
         $product = Product::findOrFail($id);
         return view('productshow', compact('product'));
     }
+
     public function showAll()
     {
-        $product = Product::all();
-        return view('products/products', compact('product'));
+        $products = Product::all();
+        return view('products.products', compact('products'));
     }
 
-    public function addToCart(Request $request)
+
+    public function addToCart(Request $request): RedirectResponse
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
@@ -117,15 +89,19 @@ class ProductController extends Controller
 
         $cart = session()->get('cart', []);
 
-        $cart[$request->product_id] = [
-            "name" => $product->name,
-            "quantity" => $request->quantity,
-            "price" => $product->price,
-            "image" => $product->image
-        ];
+        if (isset($cart[$request->product_id])) {
+            $cart[$request->product_id]['quantity'] += $request->quantity;
+        } else {
+            $cart[$request->product_id] = [
+                "name" => $product->name,
+                "quantity" => $request->quantity,
+                "price" => $product->price,
+                "image" => $product->image
+            ];
+        }
 
         session()->put('cart', $cart);
 
-        return redirect()->route('product.show', $product->id)->with('success', 'Product added to cart!');
+        return redirect()->route('product.showPublic', $product->id)->with('success', 'Product added to cart!');
     }
 }
