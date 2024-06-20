@@ -13,7 +13,6 @@ Route::get('/', [ProductController::class, 'showAll']);
 
 Route::get('/product/{id}', [ProductController::class, 'showPublic'])->name('product.showPublic');
 Route::resource('products', ProductController::class);
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [ProductController::class, 'addToCart'])->name('cart.add');
 Route::get('/profil', function () {
     return view('profil');

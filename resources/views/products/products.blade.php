@@ -9,9 +9,15 @@
                     <a class="cardItem-title text-primary" href="{{route('product.showPublic', $produit->id)}}">{{$produit->name}}</a>
                     <span class="cardItem-subtitle">{{$produit->price}} euros</span>
                 </div>
-                <button class="btn btn-primary circle">
-                    <i class="fa-solid fa-cart-plus"></i>
-                </button>
+                @auth
+                    <form action="{{ route('cart.add') }}" method="POST">
+                        @csrf
+                        <input name="product_id" type="hidden" value="{{$produit->id}}">
+                        <button type="submit" class="btn btn-primary circle panier">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </form>
+                @endauth
             </div>
             <span class="cardItem-subtitle mt-3 text-secondary">{{$produit->description}}</span>
         </div>

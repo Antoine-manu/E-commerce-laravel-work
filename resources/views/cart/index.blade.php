@@ -3,25 +3,41 @@
 <div class="container mt-5">
     <h1>Mon panier</h1>
     <hr>
-    <div class="cart-item d-flex">
-        <div class="d-flex flex-column col-4">
-            <img src="{{asset('chaise.webp')}}" class="cardItem-img" alt="" width="50" height="50">
+    <div class="d-flex flex-row justify-content-between mt-3">
+        <div class="w-75">
+            <table class="table table-striped table-hover">
+                <thead class="thead">
+                    <tr>
+                        <th >Produit</th>
+                        <th >Prix</th>
+                        <th >Quantité</th>
+                        <th >Total</th>
+                        <th >Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($products as $product)
+                        <tr>
+                            <td >{{$product["name"]}}</td>
+                            <td >{{$product["price"]}}</td>
+                            <td >{{$product["quantity"]}}</td>
+                            <td >{{$product["total"]}}</td>
+                            <td >Actions</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        <div class="d-flex flex-column col-8 justify-content-between">
-            <div class="d-flex flex-row">
-                <h3>Chaise</h3>
-            </div>
-            <div class="d-flex flex-row align-self-end">
-                <div class="flex-column">
-                    <label for="quantity">Quantité</label>
-                    <input type="number" id="quantity">
-                </div>
-                <div class="flex-column ms-5">
-                    <button class="btn btn-danger">
-                        <i class="fa-solid fa-trash" title="Supprimer l'article"></i>
-                    </button>
-                </div>
+        <div class="w-25 d-flex flex-column ms-4">
+            <div class="card p-4">
+                <h3 class="mt-3">Total du panier : {{$total}} €</h3>
+                <hr>
+                <form action="" method="POST">
+                    @csrf
+                    <button class="btn btn-primary mt-3">Commander</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
+@include('components.footer')

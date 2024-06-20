@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 
 class ProductController extends Controller
 {
@@ -108,24 +109,37 @@ class ProductController extends Controller
 
     public function addToCart(Request $request)
     {
-        $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1'
-        ]);
-
         $product = Product::findOrFail($request->product_id);
-
+        
         $cart = session()->get('cart', []);
 
-        $cart[$request->product_id] = [
-            "name" => $product->name,
-            "quantity" => $request->quantity,
-            "price" => $product->price,
-            "image" => $product->image
-        ];
+        if($cart["products"]){
+            if($cart[$product->id]){
+                $cart[$product->id] = [
+                    "name" => $product->name,
+                    "quantity" => intval($cart[$product->id]["quantity"]) + 1,
+                    "price" => $product->price,
+                    "image" => $product->image
+                ];
+            } else {
+                $cart[$product->id] = [
+                    "name" => $product->name,
+                    "quantity" => 1,
+                    "price" => $product->price,
+                    "image" => $product->image
+                ];
+            }
+        } else {
+            $cart = [];
+            $cart[$product->id] = [
+                "name" => $product->name,
+                "quantity" => 1,
+                "price" => $product->price,
+                "image" => $product->image
+            ];
+        }
 
         session()->put('cart', $cart);
-
-        return redirect()->route('product.show', $product->id)->with('success', 'Product added to cart!');
+        return redirect()->route('cart.index')->with('success', 'Ajouté au panier!');
     }
 }

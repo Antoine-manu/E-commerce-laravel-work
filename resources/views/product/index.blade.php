@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Products') }}
+                                Produits
                             </span>
 
                              <div class="float-right">
                                 <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  Nouveau produit
                                 </a>
                               </div>
                         </div>
@@ -60,7 +60,7 @@
                                                     <a class="btn btn-sm btn-success" href="{{ route('products.edit', $product->id) }}"><i class="fa fa-fw fa-edit"></i> Editer</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> Supprimer</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Voulez-vous le supprimer ?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> Supprimer</button>
                                                 </form>
                                             </td>
                                         </tr>
